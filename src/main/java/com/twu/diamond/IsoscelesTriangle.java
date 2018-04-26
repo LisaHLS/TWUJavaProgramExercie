@@ -10,8 +10,6 @@ public class IsoscelesTriangle {
 
     private int lines;
 
-    private String name;
-
     public IsoscelesTriangle(int lines) {
         this.lines = lines;
     }
@@ -20,23 +18,16 @@ public class IsoscelesTriangle {
         return IntStream.range(0, asterisksNum).mapToObj(item -> ASTERISK).reduce("", String::concat);
     }
 
-    public void printTriangle(boolean withName) {
+    public void printTriangle() {
 
         for (int i = 0, j = 1; i < lines; i++, j += 2) {
-
             String asterisks = printAsterisks(j);
-
-            if (withName && name.length() > 0 && i == lines - 1) {
-                System.out.println(name);
-
-            }else{
-                System.out.println(String.format("%" + (lines + i) + "s", asterisks));
-            }
+            System.out.println(String.format("%" + (lines + i) + "s", asterisks));
         }
     }
 
     public static void main(String[] args) {
         int n = 3;
-        new IsoscelesTriangle(n).printTriangle(false);
+        new IsoscelesTriangle(n).printTriangle();
     }
 }

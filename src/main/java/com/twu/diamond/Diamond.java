@@ -1,38 +1,18 @@
 package com.twu.diamond;
 
-/**
- * Created by ASUS on 2018/4/26.
- */
-public class Diamond {
-    public static final String ASTERISK = "*";
+public class Diamond extends IsoscelesTriangle{
 
     private int lines;
-
     public Diamond(int lines) {
-        this.lines = lines*2-1;
+        super(lines);
+        this.lines = lines;
     }
 
     public void printDiamond() {
-        if (lines % 2 == 0) {
-            lines++; // 计算菱形大小
-        }
-        for (int i = 0; i < lines / 2 + 1; i++) {
-            for (int j = lines / 2 + 1; j > i + 1; j--) {
-                System.out.print(" ");
-            }
-            for (int j = 0; j < 2 * i + 1; j++) {
-                System.out.print("*");
-            }
-            System.out.println();
-        }
-        for (int i = lines / 2 + 1; i < lines; i++) {
-            for (int j = 0; j < i - lines / 2; j++) {
-                System.out.print(" ");
-            }
-            for (int j = 0; j < 2 * lines - 1 - 2 * i; j++) {
-                System.out.print("*");
-            }
-            System.out.println();
+        super.printTriangle();
+        for (int i = lines - 1, j = 2 * i - 1; i > 0; i--, j -= 2) {
+            String asterisks = super.printAsterisks(j);
+            System.out.println(String.format("%" + (lines + i - 1) + "s", asterisks));
         }
     }
 
