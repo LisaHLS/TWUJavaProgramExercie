@@ -1,5 +1,7 @@
 package com.twu.diamond;
 
+import java.util.stream.IntStream;
+
 /**
  * Created by ASUS on 2018/4/26.
  */
@@ -8,23 +10,33 @@ public class IsoscelesTriangle {
 
     private int lines;
 
+    private String name;
+
     public IsoscelesTriangle(int lines) {
         this.lines = lines;
     }
 
-    public void printTriangle() {
-        for (int i = 1; i <= lines; i++) {
-            for (int j = 1; j <= lines - i; j++)
-                System.out.print(" ");
-            for (int k = 1; k <= i * 2 - 1; k++)
-                System.out.print("*");
-            System.out.println();
+    public String printAsterisks(int asterisksNum) {
+        return IntStream.range(0, asterisksNum).mapToObj(item -> ASTERISK).reduce("", String::concat);
+    }
+
+    public void printTriangle(boolean withName) {
+
+        for (int i = 0, j = 1; i < lines; i++, j += 2) {
+
+            String asterisks = printAsterisks(j);
+
+            if (withName && name.length() > 0 && i == lines - 1) {
+                System.out.println(name);
+
+            }else{
+                System.out.println(String.format("%" + (lines + i) + "s", asterisks));
+            }
         }
     }
 
     public static void main(String[] args) {
         int n = 3;
-        new IsoscelesTriangle(n).printTriangle();
+        new IsoscelesTriangle(n).printTriangle(false);
     }
-
 }
